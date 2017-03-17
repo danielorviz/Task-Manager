@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="plantillas/plantillaPrincipal.xhtml">
+	<ui:define name ="h2">
+		<h2 align="center">#{msgs.tituloLogin}</h2>
+	</ui:define>
+	<ui:define name="content">
+	    
+	<p>Usuario logueado: ${sessionScope.usuario}</p>
+	<h:form>
+		<p:panelGrid  id="Grid" columns="2" cellpadding="5">
+  Usuario
+  <h:panelGroup>
+			<p:inputText value="#{loginBean.login}" required="true"
+				requiredMessage="#{msgs.formAlta_nombre_requiredMessage}"
+				validatorMessage="#{msgs.formAlta_nombre_validatorMessage}"
+				id="login">
+				
+			</p:inputText>
+			<p:message for="login" />
+		</h:panelGroup>
+  
+  Contraseña
+  <h:panelGroup>
+			<p:password value="#{loginBean.password}" required="true"
+				requiredMessage="#{msgs.formAlta_apellidos_requiredMessage}"
+				validatorMessage="#{msgs.formAlta_apellidos_validatorMessage}"
+				id="password">
+				
+			</p:password>
+			<p:message for="password" />
+		</h:panelGroup>
+  
+  
+		
+	</p:panelGrid>
+		
+		<p:commandButton  
+		value="Iniciar Sesion" 
+		action="#{loginBean.login()}"
+		update="Grid" process="@form"/>
+		
+		
+		<h:button  
+		value="Registrarse" 
+		outcome="/registro.xhtml"
+		/>
+		
+	</h:form>
+
+
+	</ui:define>
+	
+</ui:composition>
+</html>

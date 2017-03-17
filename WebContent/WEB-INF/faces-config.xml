@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+<application>
+	<resource-bundle>
+		<base-name>messages</base-name>
+		<var>msgs</var>
+	</resource-bundle>
+</application>
+
+<managed-bean>
+	<managed-bean-name>settings</managed-bean-name>
+	<managed-bean-class>uo.sdi.presentacion.BeanSettings</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>loginBean</managed-bean-name>
+	<managed-bean-class>uo.sdi.presentacion.LoginBean</managed-bean-class>
+	<managed-bean-scope>view</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>usuarioBean</managed-bean-name>
+	<managed-bean-class>uo.sdi.presentacion.UsuarioBean</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+</managed-bean>
+<navigation-rule>
+<from-view-id>login.xhtml</from-view-id>
+	<navigation-case>
+		<from-action>#{loginBean.login()}</from-action>
+		<from-outcome>EXITOADMIN</from-outcome>
+		<to-view-id>/privado/principalAdmin.xhtml</to-view-id>
+	</navigation-case>
+	
+	<navigation-case>
+		<from-action>#{loginBean.login()}</from-action>
+		<from-outcome>EXITO</from-outcome>
+		<to-view-id>/privado/principalUsuario.xhtml</to-view-id>
+	</navigation-case>
+	
+	<navigation-case>
+		<from-action>#{loginBean.login()}</from-action>
+		<from-outcome>FRACASO</from-outcome>
+		<to-view-id>/login.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+	<from-view-id>*</from-view-id>
+	<navigation-case>
+		<from-action>#{loginBean.cerrarSesion()}</from-action>
+		<from-outcome>EXITO</from-outcome>
+		<to-view-id>/login.xhtml</to-view-id>
+		
+	</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+<from-view-id>registro.xhtml</from-view-id>
+	<navigation-case>
+		<from-action>#{usuarioBean.registrar()}</from-action>
+		<from-outcome>EXITO</from-outcome>
+		<to-view-id>/login.xhtml</to-view-id>
+	</navigation-case>
+	<navigation-case>
+		<from-action>#{usuarioBean.registrar()}</from-action>
+		<from-outcome>FRACASO</from-outcome>
+		<to-view-id>/registro.xhtml</to-view-id>
+	</navigation-case>
+	
+	<navigation-case>
+		<from-action>#{tareasBean.cargarInbox()}</from-action>
+		<from-outcome>EXITO</from-outcome>
+		<to-view-id>/tareas.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+<from-view-id>principalAdmin.xhtml</from-view-id>
+	<navigation-case>
+		<from-action>#{usuarioBean.listado()}</from-action>
+		<from-outcome>ERROR</from-outcome>
+		<to-view-id>/error.xhtml</to-view-id>
+	</navigation-case>
+	<navigation-case>
+		<from-action>#{usuarioBean.eliminarUsuario(viduser)}</from-action>
+		<from-outcome>EXITO</from-outcome>
+		<to-view-id>/privado/principalAdmin.xhtml</to-view-id>
+	</navigation-case>
+	<navigation-case>
+		<from-action>#{usuarioBean.eliminarUsuario(viduser)}</from-action>
+		<from-outcome>ERROR</from-outcome>
+		<to-view-id>/error.xhtml</to-view-id>
+	</navigation-case>
+</navigation-rule>
+
+</faces-config>

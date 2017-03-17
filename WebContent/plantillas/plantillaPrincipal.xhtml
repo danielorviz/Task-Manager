@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<f:view locale="#{settings.locale}">
+<h:head>
+  <title><ui:insert name="title">#{msgs.tituloHead}</ui:insert></title>
+</h:head>
+<body>
+<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
+<h:form>
+	<div id="header">
+	    <ui:insert name="header">
+	    	<h1 align="center">#{msgs.tituloAplicacion1}</h1>
+	    	<!--  include your header file or uncomment the include below and create header.xhtml in this directory -->
+	    	<!-- <ui:include src="header.xhtml"/> -->
+	    </ui:insert>
+	
+		</div>
+		<div id="h2">
+	    <ui:insert name="h2">
+	    	
+	    </ui:insert>
+	</div>
+	
+		<p:menubar>
+				<p:submenu label="#{msgs.tituloOpciones}" icon="ui-icon-document">
+					<p:menuitem immediate="true" value="#{msgs.enlaceListado}"
+						action="#{controller.listado}" />
+					<p:separator />
+					<p:menuitem immediate="true" value="#{msgs.enlaceCerrarSesion}"
+						action="#{loginBean.cerrarSesion()}" />
+				</p:submenu>
+				<p:submenu style="float:right" label="#{msgs.textoIdioma}"
+					icon="ui-icon-document">
+					<p:menuitem immediate="true" value="#{msgs.enlaceIdiomaES}"
+						actionListener="#{settings.setSpanish}" update="@all" />
+					<p:menuitem immediate="true" value="#{msgs.enlaceIdiomaEN}"
+						actionListener="#{settings.setEnglish}" update="@all" />
+				</p:submenu>
+	
+			</p:menubar>
+	<div id="content">
+		<!--  <p:messages showDetail="true"></p:messages>-->
+	  <ui:insert name="content">
+	    	Content area.  See comments below this line in the source.
+	    	<!--  include your content file or uncomment the include below and create content.xhtml in this directory -->
+		  	<!-- <div> -->
+	    	<!-- <ui:include src="content.xhtml"/> -->  
+	    	<!-- </div> -->
+	  </ui:insert>
+	</div>
+	
+	<div id="footer">
+	  <ui:insert name="footer">
+	  <p:separator/>
+	  	<h:form>
+	    	<p:commandLink value="casa" action="/login.xhtml"></p:commandLink>
+	    </h:form>
+	    	<!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
+			<!--<ui:include src="footer.xhtml"/>  -->
+	  </ui:insert>
+	</div>
+</h:form>
+</body>
+
+</f:view>
+</html>

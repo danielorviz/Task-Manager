@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/plantillas/plantillaPrincipal.xhtml">
+	<ui:define name="header">
+	    Add your header here or delete to use the default
+	</ui:define>
+	<ui:define name="content">
+	    <p:panel header="Usuarios del sistema:">
+			<p:dataTable id="tablaUsuarios" var="vuser"
+				value="#{usuarioBean.users}" border="1">
+				<p:column>
+					<f:facet name="header">Login</f:facet>#{vuser.login}</p:column>
+				<p:column>
+					<f:facet name="header">IsAdmin</f:facet>#{vuser.isadmin}</p:column>
+				<p:column>
+					<f:facet name="header">Email</f:facet>#{vuser.email}</p:column>
+				<p:column>
+					<f:facet name="header">Status</f:facet>#{vuser.status}</p:column>
+				<p:column>
+					<f:facet name="header">Eliminar</f:facet>
+					<p:commandLink action="#{usuarioBean.eliminarUsuario(vuser.id)}" type="submit"
+						value="Eliminar" immediate="true" update="tablaUsuarios">
+					</p:commandLink>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Editar Status</f:facet>
+					<p:commandLink action="editar" type="submit"
+						value="#{msgs.tablaEditar}"
+						actionListener="#{alumno.setAlumno(valumno)}" immediate="true">
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+	<ui:define name="footer">
+	    Add your footer here or delete to use the default
+	</ui:define>
+</ui:composition>
+</html>

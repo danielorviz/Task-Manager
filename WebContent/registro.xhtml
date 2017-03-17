@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="plantillas/plantillaPrincipal.xhtml">
+	<ui:define name="h2">
+	    <h2 align="center">Registrarse</h2>
+	</ui:define>
+	<ui:define name="content">
+	    
+
+	<h:form>
+	
+	<p:panelGrid  id="Grid" columns="2" cellpadding="5">
+  Usuario
+  <h:panelGroup>
+			<p:inputText value="#{usuarioBean.user.login}" required="true"
+				requiredMessage="#{msgs.formAlta_nombre_requiredMessage}"
+				validatorMessage="#{msgs.formAlta_nombre_validatorMessage}"
+				id="login">
+				<f:validateLength maximum="20" />
+			</p:inputText>
+			<p:message for="login" />
+		</h:panelGroup>
+  
+  Email
+  <h:panelGroup>
+			<p:inputText value="#{usuarioBean.user.email}" required="true"
+				requiredMessage="#{msgs.formAlta_apellidos_requiredMessage}"
+				validatorMessage="#{msgs.formAlta_apellidos_validatorMessage}"
+				id="email">
+				<f:validateLength maximum="40" />
+			</p:inputText>
+			<p:message for="email" />
+		</h:panelGroup>
+	Contraseña
+  <h:panelGroup>
+			<p:password value="#{usuarioBean.user.password}" required="true"
+				requiredMessage="#{msgs.formAlta_apellidos_requiredMessage}"
+				validatorMessage="#{msgs.formAlta_apellidos_validatorMessage}"
+				id="password">
+				<f:validateLength maximum="40" />
+			</p:password>
+			<p:message for="password" />
+		</h:panelGroup>
+	Confirmar Contraseña
+  <h:panelGroup>
+			<p:password value="#{usuarioBean.passwordConfirmacion}" required="true"
+				requiredMessage="#{msgs.formAlta_apellidos_requiredMessage}"
+				validatorMessage="#{msgs.formAlta_apellidos_validatorMessage}"
+				id="passwordConfirm">
+				<f:validateLength maximum="40" />
+			</p:password>
+			<p:message for="passwordConfirm" />
+		</h:panelGroup>
+  
+  
+		
+	</p:panelGrid>
+
+		
+		
+		
+		<h:commandButton  
+		value="registrar" 
+		action="#{usuarioBean.registrar()}"
+		update="Grid" process="@form"/>
+		
+		<h:commandButton  
+		value="Tareas" 
+		action="#{tareasBean.cargarInbox()}"
+		immediate="true"/>
+		
+		<p:commandButton  
+		value="TareasSemana" 
+		action="#{tareasBean.cargarSemana()}"
+		immediate="true"
+		/>
+		<h:link outcome="/tareas.xhtml"></h:link>
+		
+	</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+</html>
