@@ -17,7 +17,7 @@ import uo.sdi.dto.types.UserStatus;
 @ManagedBean(name="usuarioBean")
 @SessionScoped
 public class UsuarioBean {
-
+	// modificado
 	private User user = new User();
 	private String passwordConfirmacion;
 	private List<User> users;
